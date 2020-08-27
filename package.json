@@ -4,7 +4,8 @@
   "description": "react-dancing is a bit module for animation",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "build": "babel src -d ./"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/behnammodi/react-dancing/issues"
   },
-  "homepage": "https://github.com/behnammodi/react-dancing#readme"
+  "homepage": "https://github.com/behnammodi/react-dancing#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-preset-minify": "^0.5.1"
+  },
+  "peerDependencies": {
+    "react":"^16.13.1"
+  }
 }
