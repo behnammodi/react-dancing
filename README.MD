@@ -36,10 +36,6 @@ A simple demo of `react-dancing` [DEMO](https://codesandbox.io/s/react-dancing-f
 import React from "react";
 import { Dancer, useDancer } from "react-dancing";
 
-function Hello() {
-  return <b>React Dancing</b>;
-}
-
 function App() {
   const [ref, play] = useDancer({
     duration: "1s",
@@ -55,9 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <Dancer ref={ref}>
-        <Hello />
-      </Dancer>
+      <Dancer ref={ref}>React Dancing</Dancer>
       <button onClick={handleGo}>Go</button>
       <button onClick={handleBack}>Back</button>
     </div>
@@ -66,6 +60,7 @@ function App() {
 ```
 
 ## Add default style
+
 If you want to add style in initial time and without
 animation, you can use `defaultStyle` in `useDancer` config
 
