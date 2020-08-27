@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "build": "babel src -d ./"
+    "build": "babel src -d ./",
+    "preversion": "",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
