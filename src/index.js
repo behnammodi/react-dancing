@@ -4,10 +4,10 @@ import {
   forwardRef,
   createElement,
   useLayoutEffect,
-  useImperativeHandle,
+  useImperativeHandle
 } from "react";
 
-const Dancer = forwardRef(({ children, ...restProps }, ref) => {
+const Dancer = forwardRef((props, ref) => {
   const innerRef = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -31,10 +31,17 @@ const Dancer = forwardRef(({ children, ...restProps }, ref) => {
       if (!delay) return;
 
       innerRef.current.style.transitionDelay = delay;
-    },
+    }
   }));
 
-  return createElement("div", { ...restProps, ref: innerRef }, children);
+  const cloneProps = {};
+  for (let prop in props) {
+    cloneProps[prop] = props[prop];
+  }
+  cloneProps.ref = innerRef;
+  delete cloneProps.children;
+
+  return createElement("div", cloneProps, props.children);
 });
 
 const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
