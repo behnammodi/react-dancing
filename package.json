@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run test",
     "build": "babel src -d ./",
-    "preversion": "",
+    "lint": "eslint ./src",
+    "preversion": "npm run lint",
     "version": "npm run build",
     "postversion": "git push && git push --tags && npm publish"
   },
@@ -27,7 +28,9 @@
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
-    "babel-preset-minify": "^0.5.1"
+    "babel-preset-minify": "^0.5.1",
+    "eslint": "^7.7.0",
+    "eslint-plugin-react": "^7.20.6"
   },
   "peerDependencies": {
     "react": "^16.13.1"
