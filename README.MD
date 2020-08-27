@@ -16,7 +16,6 @@
   <img src="https://img.shields.io/npm/l/react-dancing.svg" alt="License">
 </a>
 
-
 ## Install
 
 ```bash
@@ -24,11 +23,13 @@ npm install react-dancing
 ```
 
 ## Big advantages
+
 - Animation without re-render component
 - less than 1KB
 - Without dependency
 
 ## Use
+
 A simple demo of `react-dancing` [DEMO](https://codesandbox.io/s/react-dancing-first-sample-1rnky)
 
 ```jsx
@@ -41,7 +42,7 @@ function Hello() {
 
 function App() {
   const [ref, play] = useDancer({
-    duration: "1s"
+    duration: "1s",
   });
 
   const handleGo = () => {
@@ -62,4 +63,16 @@ function App() {
     </div>
   );
 }
+```
+
+## Add default style
+If you want to style in initial time and without
+animation, you can use `defaultStyle` in `useDancer` config
+
+```jsx
+const [ref, play] = useDancer({
+  ...
+  defaultStyle: { color: "#ff0000" },
+  ...
+});
 ```
