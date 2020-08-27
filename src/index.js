@@ -17,19 +17,23 @@ const Dancer = forwardRef(({ children }, ref) => {
   useImperativeHandle(ref, () => ({
     setStyle: (style) => {
       if (!style) return;
-      
+
       const keys = Object.keys(style);
       keys.forEach((key) => {
         innerRef.current.style[key] = style[key];
       });
     },
-    setDuration: (duration) => {
+    setDuration: (duration = "0.2s") => {
       innerRef.current.style.transitionDuration = duration;
     },
     setTimingFunction: (timingFunction) => {
+      if (!timingFunction) return;
+
       innerRef.current.style.transitionTimingFunction = timingFunction;
     },
     setDelay: (delay) => {
+      if (!delay) return;
+
       innerRef.current.style.transitionDelay = delay;
     },
   }));
@@ -37,7 +41,7 @@ const Dancer = forwardRef(({ children }, ref) => {
   return createElement("div", { ref: innerRef }, children);
 });
 
-const useDancer = ({ defaultStyle, duration, timingFunction, delay }) => {
+const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
   const ref = useRef();
 
   useLayoutEffect(() => {

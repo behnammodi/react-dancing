@@ -37,9 +37,7 @@ import React from "react";
 import { Dancer, useDancer } from "react-dancing";
 
 function App() {
-  const [ref, play] = useDancer({
-    duration: "1s",
-  });
+  const [ref, play] = useDancer();
 
   const handleGo = () => {
     play({ transform: "translateX(100px)" });
@@ -59,10 +57,22 @@ function App() {
 }
 ```
 
+## Change duration
+
+Default duration is `200ms` but you can change it.
+
+```jsx
+const [ref, play] = useDancer({
+  ...
+  duration: '3s',
+  ...
+});
+```
+
 ## Add default style
 
 If you want to add style in initial time and without
-animation, you can use `defaultStyle` in `useDancer` config
+animation, you can use `defaultStyle` in `useDancer` config.
 
 ```jsx
 const [ref, play] = useDancer({
