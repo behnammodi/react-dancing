@@ -6,7 +6,7 @@ import {
   createElement,
 } from "react";
 
-const Dancer = forwardRef(({ children }, ref) => {
+const Dancer = forwardRef(({ children, ...restProps }, ref) => {
   const innerRef = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -33,7 +33,7 @@ const Dancer = forwardRef(({ children }, ref) => {
     },
   }));
 
-  return createElement("div", { ref: innerRef }, children);
+  return createElement("div", { ...restProps, ref: innerRef }, children);
 });
 
 const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
