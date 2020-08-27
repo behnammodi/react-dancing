@@ -66,7 +66,7 @@ function App() {
 ```
 
 ## Add default style
-If you want to style in initial time and without
+If you want to add style in initial time and without
 animation, you can use `defaultStyle` in `useDancer` config
 
 ```jsx
