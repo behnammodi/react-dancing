@@ -1,45 +1,43 @@
-import {
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  createElement,
-} from "react";
+import React from "react";
 
-const Dancer = forwardRef(({ children, ...restProps }, ref) => {
-  const innerRef = useRef();
+const Dancer = React.forwardRef(({ children, ...restProps }, ref) => {
+  const innerRef = React.useRef();
 
-  useImperativeHandle(ref, () => ({
-    setStyle: (style) => {
-      if (!style) return;
+  React.useImperativeHandle(ref, () => {
+    const target = innerRef.current;
 
-      const keys = Object.keys(style);
-      keys.forEach((key) => {
-        innerRef.current.style[key] = style[key];
-      });
-    },
-    setDuration: (duration = "0.2s") => {
-      innerRef.current.style.transitionDuration = duration;
-    },
-    setTimingFunction: (timingFunction) => {
-      if (!timingFunction) return;
+    return {
+      setStyle: (style) => {
+        if (!style) return;
 
-      innerRef.current.style.transitionTimingFunction = timingFunction;
-    },
-    setDelay: (delay) => {
-      if (!delay) return;
+        const keys = Object.keys(style);
+        keys.forEach((key) => {
+          target.style[key] = style[key];
+        });
+      },
+      setDuration: (duration = "0.2s") => {
+        target.style.transitionDuration = duration;
+      },
+      setTimingFunction: (timingFunction) => {
+        if (!timingFunction) return;
 
-      innerRef.current.style.transitionDelay = delay;
-    },
-  }));
+        target.style.transitionTimingFunction = timingFunction;
+      },
+      setDelay: (delay) => {
+        if (!delay) return;
 
-  return createElement("div", { ...restProps, ref: innerRef }, children);
+        target.style.transitionDelay = delay;
+      },
+    };
+  });
+
+  return React.createElement("div", { ...restProps, ref: innerRef }, children);
 });
 
 const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
-  const ref = useRef();
+  const ref = React.useRef();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     ref.current.setStyle(defaultStyle);
     ref.current.setDuration(duration);
     ref.current.setTimingFunction(timingFunction);
