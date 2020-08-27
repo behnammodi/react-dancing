@@ -41,7 +41,6 @@ function Hello() {
 
 function App() {
   const [ref, play] = useDancer({
-    defaultStyle: { transform: "translateX(0px)" },
     duration: "1s"
   });
 
