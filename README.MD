@@ -48,10 +48,10 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <Dancer ref={ref}>React Dancing</Dancer>
-      <button onClick={handleGo}>Go</button>
       <button onClick={handleBack}>Back</button>
+      <button onClick={handleGo}>Go</button>
     </div>
   );
 }
