@@ -1,13 +1,13 @@
 {
   "name": "react-dancing",
-  "version": "0.0.1-1",
+  "version": "0.0.1",
   "description": "react-dancing is a bit module for animation",
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
     "build": "babel src -d ./",
     "preversion": "",
-    "version": "npm run build && git add -A dist",
+    "version": "npm run build",
     "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
