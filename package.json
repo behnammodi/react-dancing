@@ -1,0 +1,22 @@
+{
+  "name": "react-dancing",
+  "version": "1.0.0",
+  "description": "react-dancing is a bit module for animation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/behnammodi/react-dancing.git"
+  },
+  "keywords": [
+    "animation"
+  ],
+  "author": "Behnam Mohammadi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/behnammodi/react-dancing/issues"
+  },
+  "homepage": "https://github.com/behnammodi/react-dancing#readme"
+}
