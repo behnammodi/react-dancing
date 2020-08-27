@@ -59,7 +59,7 @@ function App() {
 
 ## Change duration
 
-Default duration is `200ms` but you can change it.
+By Default `duration` is `200ms` but you can change it.
 
 ```jsx
 const [ref, play] = useDancer({
@@ -81,3 +81,28 @@ const [ref, play] = useDancer({
   ...
 });
 ```
+
+## Change timing function
+
+By Default `timingFunction` is `ease` but you can change it to:
+
+|         |          |             |        |            |          |            |                   |         |         |       |
+| :-----: | :------: | :---------: | :----: | :--------: | :------: | :--------: | :---------------: | :-----: | :-----: | :---: |
+| ease-in | ease-out | ease-in-out | linear | step-start | step-end | steps(...) | cubic-bezier(...) | inherit | initial | unset |
+|         |          |             |        |            |          |            |                   |         |         |       |
+
+[More Info MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)
+
+```jsx
+const [ref, play] = useDancer({
+  ...
+  timingFunction: 'ease-in-out',
+  ...
+});
+```
+
+Also you can use these 2 links to find best timing function
+
+[easings.net](https://easings.net/)
+
+[cubic-bezier.com](https://cubic-bezier.com/)
