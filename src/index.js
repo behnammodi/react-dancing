@@ -4,7 +4,7 @@ import {
   forwardRef,
   useImperativeHandle,
   useLayoutEffect,
-  createElement
+  createElement,
 } from "react";
 
 const Dancer = forwardRef(({ children }, ref) => {
@@ -16,6 +16,8 @@ const Dancer = forwardRef(({ children }, ref) => {
 
   useImperativeHandle(ref, () => ({
     setStyle: (style) => {
+      if (!style) return;
+      
       const keys = Object.keys(style);
       keys.forEach((key) => {
         innerRef.current.style[key] = style[key];
