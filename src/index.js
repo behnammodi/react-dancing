@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types, react/display-name */
 import {
+  memo,
   useRef,
   forwardRef,
   createElement,
@@ -7,42 +8,45 @@ import {
   useImperativeHandle
 } from "react";
 
-const Dancer = forwardRef((props, ref) => {
-  const innerRef = useRef();
+const Dancer = memo(
+  forwardRef((props, ref) => {
+    console.log("render Dancer");
+    const innerRef = useRef();
 
-  useImperativeHandle(ref, () => ({
-    setStyle: (style) => {
-      if (!style) return;
+    useImperativeHandle(ref, () => ({
+      setStyle: (style) => {
+        if (!style) return;
 
-      const keys = Object.keys(style);
-      keys.forEach((key) => {
-        innerRef.current.style[key] = style[key];
-      });
-    },
-    setDuration: (duration = "0.2s") => {
-      innerRef.current.style.transitionDuration = duration;
-    },
-    setTimingFunction: (timingFunction) => {
-      if (!timingFunction) return;
+        const keys = Object.keys(style);
+        keys.forEach((key) => {
+          innerRef.current.style[key] = style[key];
+        });
+      },
+      setDuration: (duration = "0.2s") => {
+        innerRef.current.style.transitionDuration = duration;
+      },
+      setTimingFunction: (timingFunction) => {
+        if (!timingFunction) return;
 
-      innerRef.current.style.transitionTimingFunction = timingFunction;
-    },
-    setDelay: (delay) => {
-      if (!delay) return;
+        innerRef.current.style.transitionTimingFunction = timingFunction;
+      },
+      setDelay: (delay) => {
+        if (!delay) return;
 
-      innerRef.current.style.transitionDelay = delay;
+        innerRef.current.style.transitionDelay = delay;
+      }
+    }));
+
+    const cloneProps = {};
+    for (let prop in props) {
+      cloneProps[prop] = props[prop];
     }
-  }));
+    cloneProps.ref = innerRef;
+    delete cloneProps.children;
 
-  const cloneProps = {};
-  for (let prop in props) {
-    cloneProps[prop] = props[prop];
-  }
-  cloneProps.ref = innerRef;
-  delete cloneProps.children;
-
-  return createElement("div", cloneProps, props.children);
-});
+    return createElement("div", cloneProps, props.children);
+  })
+);
 
 const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
   const ref = useRef();
