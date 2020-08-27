@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useRef,
   forwardRef,
   useImperativeHandle,
@@ -9,10 +8,6 @@ import {
 
 const Dancer = forwardRef(({ children }, ref) => {
   const innerRef = useRef();
-
-  useEffect(() => {
-    innerRef.current.style.transitionProperty = "transition opacity";
-  }, []);
 
   useImperativeHandle(ref, () => ({
     setStyle: (style) => {
