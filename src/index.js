@@ -5,7 +5,7 @@ import {
   forwardRef,
   createElement,
   useLayoutEffect,
-  useImperativeHandle
+  useImperativeHandle,
 } from "react";
 
 const Dancer = memo(
@@ -34,7 +34,7 @@ const Dancer = memo(
         if (!delay) return;
 
         innerRef.current.style.transitionDelay = delay;
-      }
+      },
     }));
 
     const cloneProps = {};
@@ -56,7 +56,7 @@ const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
     ref.current.setDuration(duration);
     ref.current.setTimingFunction(timingFunction);
     ref.current.setDelay(delay);
-  });
+  }, []);
 
   const play = (style) => {
     ref.current.setStyle(style);
