@@ -7,8 +7,9 @@
     "test": "npm run test",
     "build": "babel src -d ./",
     "lint": "eslint ./src",
+    "super-minify": "node scripts/super-minify.js",
     "preversion": "npm run lint",
-    "version": "npm run build",
+    "version": "npm run build && npm run super-minify",
     "postversion": "git push && git push --tags && npm publish"
   },
   "repository": {
