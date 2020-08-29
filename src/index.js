@@ -52,9 +52,10 @@ const Dancer = memo(
 
 const useDancer = (config) => {
   const ref = useRef();
-  
+
   useLayoutEffect(() => {
     const current = ref.current;
+    config = config || {};
     current.setStyle(config.defaultStyle);
     current.setDuration(config.duration);
     current.setTimingFunction(config.timingFunction);
