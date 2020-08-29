@@ -12,29 +12,32 @@ const Dancer = memo(
   forwardRef((props, ref) => {
     const innerRef = useRef();
 
-    useImperativeHandle(ref, () => ({
-      setStyle: (style) => {
-        if (!style) return;
+    useImperativeHandle(ref, () => {
+      const targetStyle = innerRef.current.style;
+      return {
+        setStyle: (style) => {
+          if (!style) return;
 
-        const keys = Object.keys(style);
-        keys.forEach((key) => {
-          innerRef.current.style[key] = style[key];
-        });
-      },
-      setDuration: (duration = "0.2s") => {
-        innerRef.current.style.transitionDuration = duration;
-      },
-      setTimingFunction: (timingFunction) => {
-        if (!timingFunction) return;
+          const keys = Object.keys(style);
+          keys.forEach((key) => {
+            targetStyle[key] = style[key];
+          });
+        },
+        setDuration: (duration) => {
+          targetStyle.transitionDuration = duration || "0.2s";
+        },
+        setTimingFunction: (timingFunction) => {
+          if (!timingFunction) return;
 
-        innerRef.current.style.transitionTimingFunction = timingFunction;
-      },
-      setDelay: (delay) => {
-        if (!delay) return;
+          targetStyle.transitionTimingFunction = timingFunction;
+        },
+        setDelay: (delay) => {
+          if (!delay) return;
 
-        innerRef.current.style.transitionDelay = delay;
-      },
-    }));
+          targetStyle.transitionDelay = delay;
+        },
+      };
+    });
 
     const cloneProps = {};
     for (let prop in props) {
