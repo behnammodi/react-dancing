@@ -50,14 +50,15 @@ const Dancer = memo(
   })
 );
 
-const useDancer = ({ defaultStyle, duration, timingFunction, delay } = {}) => {
+const useDancer = (config) => {
   const ref = useRef();
-
+  
   useLayoutEffect(() => {
-    ref.current.setStyle(defaultStyle);
-    ref.current.setDuration(duration);
-    ref.current.setTimingFunction(timingFunction);
-    ref.current.setDelay(delay);
+    const current = ref.current;
+    current.setStyle(config.defaultStyle);
+    current.setDuration(config.duration);
+    current.setTimingFunction(config.timingFunction);
+    current.setDelay(config.delay);
   }, []);
 
   const play = (style) => {
