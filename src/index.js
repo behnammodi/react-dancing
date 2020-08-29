@@ -10,7 +10,6 @@ import {
 
 const Dancer = memo(
   forwardRef((props, ref) => {
-    console.log("render Dancer");
     const innerRef = useRef();
 
     useImperativeHandle(ref, () => ({
