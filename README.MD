@@ -25,7 +25,7 @@ npm install react-dancing
 ## Big advantages
 
 - Animation without re-render component
-- Less than 1KB
+- Less than 0.6KB
 - Without dependency
 
 ## Use
