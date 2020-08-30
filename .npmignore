@@ -1,6 +1,9 @@
 /node_modules
+/scripts
 /src
 /.babelrc
+/.eslintrc.js
 /.gitignore
 /.npmignore
+/.prettierrc.js
 /README.MD
