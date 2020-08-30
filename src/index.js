@@ -6,7 +6,7 @@ import {
   createElement,
   useLayoutEffect,
   useImperativeHandle,
-} from "react";
+} from 'react';
 
 const Dancer = memo(
   forwardRef((props, ref) => {
@@ -24,7 +24,7 @@ const Dancer = memo(
           });
         },
         setDuration: (duration) => {
-          targetStyle.transitionDuration = duration || "0.2s";
+          targetStyle.transitionDuration = duration || '0.2s';
         },
         setTimingFunction: (timingFunction) => {
           if (!timingFunction) return;
@@ -46,7 +46,7 @@ const Dancer = memo(
     cloneProps.ref = innerRef;
     delete cloneProps.children;
 
-    return createElement("div", cloneProps, props.children);
+    return createElement('div', cloneProps, props.children);
   })
 );
 
