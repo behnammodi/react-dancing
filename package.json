@@ -1,6 +1,6 @@
 {
   "name": "react-dancing",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "react-dancing is a bit module for animation",
   "main": "index.js",
   "scripts": {
@@ -39,5 +39,5 @@
   },
   "peerDependencies": {
     "react": "^16.13.1"
-  }  
+  }
 }
