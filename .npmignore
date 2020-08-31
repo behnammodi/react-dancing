@@ -4,6 +4,8 @@
 /.babelrc
 /.eslintrc.js
 /.gitignore
+/.huskyrc.js
 /.npmignore
 /.prettierrc.js
+/lint-staged.config.js
 /README.MD
