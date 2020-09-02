@@ -19,7 +19,7 @@
 ## Install
 
 ```bash
-npm install react-dancing
+npm install react-dancingÍ
 ```
 
 ## Big advantages
@@ -33,18 +33,18 @@ npm install react-dancing
 A simple demo of `react-dancing` [DEMO](https://codesandbox.io/s/react-dancing-first-sample-1rnky)
 
 ```jsx
-import React from "react";
-import { Dancer, useDancer } from "react-dancing";
+import React from 'react';
+import { Dancer, useDancer } from 'react-dancing';
 
 function App() {
   const [ref, play] = useDancer();
 
   const handleGo = () => {
-    play({ transform: "translateX(100px)" });
+    play({ transform: 'translateX(100px)' });
   };
 
   const handleBack = () => {
-    play({ transform: "translateX(0px)" });
+    play({ transform: 'translateX(0px)' });
   };
 
   return (
