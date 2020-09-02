@@ -40,9 +40,9 @@ const Dancer = memo(
     });
 
     const cloneProps = {};
-
-    for (let prop in props) cloneProps[prop] = props[prop];
-
+    for (let prop in props) {
+      cloneProps[prop] = props[prop];
+    }
     cloneProps.ref = innerRef;
     delete cloneProps.children;
 
@@ -62,7 +62,9 @@ const useDancer = (config) => {
     current.setDelay(config.delay);
   }, []);
 
-  const play = (style) => ref.current.setStyle(style);
+  const play = (style) => {
+    ref.current.setStyle(style);
+  };
 
   return [ref, play];
 };
