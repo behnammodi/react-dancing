@@ -19,13 +19,13 @@
 ## Install
 
 ```bash
-npm install react-dancingÍ
+npm install react-dancing
 ```
 
 ## Big advantages
 
 - Animation without re-render component
-- Less than 0.6KB
+- Less than 0.6KB (GZIP)
 - Without dependency
 
 ## Use
