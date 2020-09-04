@@ -9,3 +9,4 @@
 /.prettierrc.cjs
 /lint-staged.config.cjs
 /README.MD
+/__tests__
