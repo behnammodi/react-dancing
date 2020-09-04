@@ -16,7 +16,16 @@
   <img src="https://img.shields.io/npm/l/react-dancing.svg" alt="License">
 </a>
 
-## Install
+<a href="https://snyk.io/test/npm/react-dancing">
+  <img src="https://snyk.io/test/npm/react-dancing/badge.svg?style=flat-square" alt="Known Vulnerabilities">
+</a>
+
+<a href="https://www.codetriage.com/behnammodi/react-dancing">
+  <img src="https://www.codetriage.com/behnammodi/react-dancing/badges/users.svg" alt="Open Source Helpers"> 
+</a>
+
+## Installation
+Using npm:
 
 ```bash
 npm install react-dancing
@@ -28,7 +37,7 @@ npm install react-dancing
 - Less than 0.6KB (GZIP)
 - Without dependency
 
-## Use
+## Usage
 
 A simple demo of `react-dancing` [DEMO](https://codesandbox.io/s/react-dancing-first-sample-1rnky)
 
@@ -89,7 +98,6 @@ By Default `timingFunction` is `ease` but you can change it to:
 |         |          |             |        |            |          |            |                   |         |         |       |
 | :-----: | :------: | :---------: | :----: | :--------: | :------: | :--------: | :---------------: | :-----: | :-----: | :---: |
 | ease-in | ease-out | ease-in-out | linear | step-start | step-end | steps(...) | cubic-bezier(...) | inherit | initial | unset |
-|         |          |             |        |            |          |            |                   |         |         |       |
 
 [More Info MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)
 
@@ -106,3 +114,6 @@ Also you can use these 2 links to find best timing function
 [easings.net](https://easings.net/)
 
 [cubic-bezier.com](https://cubic-bezier.com/)
+
+## Maintainer
+[Behnam Mohamamdi](https://github.com/behnammodi)
