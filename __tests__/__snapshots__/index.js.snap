@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Dancer with some props 1`] = `
+<div
+  className="a"
+  id="b"
+  style={
+    Object {
+      "margin": 100,
+    }
+  }
+/>
+`;
+
+exports[`Snapshot Simple Dancer 1`] = `<div />`;
