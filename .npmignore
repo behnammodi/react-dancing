@@ -2,10 +2,10 @@
 /scripts
 /src
 /.babelrc
-/.eslintrc.js
+/.eslintrc.cjs
 /.gitignore
-/.huskyrc.js
+/.huskyrc.cjs
 /.npmignore
-/.prettierrc.js
-/lint-staged.config.js
+/.prettierrc.cjs
+/lint-staged.config.cjs
 /README.MD

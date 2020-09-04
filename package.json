@@ -2,10 +2,22 @@
   "name": "react-dancing",
   "version": "0.2.4",
   "description": "react-dancing is a bit module for animation",
-  "main": "index.js",
+  "main": "index.cjs",
+  "type": "module",
+  "module": "index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.js"
+    }
+  },
+  "types": "react-dancing.d.ts",
   "scripts": {
     "test": "npm run test",
-    "build": "babel src -d ./",
+    "build-esmodule":"cp src/index.js ./index.js",
+    "build-commonjs": "babel src/index.js --out-file ./index.cjs",
+    "build":"npm run build-commonjs && npm run build-esmodule",
     "lint": "eslint ./src",
     "format": "prettier ./src --write --ignore-unknown",
     "super-minify": "node scripts/super-minify.js",

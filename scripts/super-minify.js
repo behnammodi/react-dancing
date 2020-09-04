@@ -25,7 +25,7 @@ const words = [
 ];
 
 let content = fs.readFileSync(
-  path.join(__dirname, '..', './index.js'),
+  path.join(__dirname, '..', './index.cjs'),
   'utf-8'
 );
 
@@ -33,5 +33,5 @@ words.forEach((word) => {
   content = content.split(word.from).join(word.to);
 });
 
-fs.writeFileSync(path.join(__dirname, '..', './index.js'), content, 'utf-8');
+fs.writeFileSync(path.join(__dirname, '..', './index.cjs'), content, 'utf-8');
 console.log('Super minify is done');
