@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshot Dancer with some props 1`] = `
+exports[`Snapshot a <Dancer /> with some props 1`] = `
 <div
   className="a"
   id="b"
@@ -12,4 +12,4 @@ exports[`Snapshot Dancer with some props 1`] = `
 />
 `;
 
-exports[`Snapshot Simple Dancer 1`] = `<div />`;
+exports[`Snapshot a simple <Dancer /> 1`] = `<div />`;
