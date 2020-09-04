@@ -1,6 +1,6 @@
 {
   "name": "react-dancing",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "react-dancing is a bit module for animation",
   "main": "index.cjs",
   "type": "module",
