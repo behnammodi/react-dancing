@@ -13,28 +13,31 @@ const Dancer = memo(
     const innerRef = useRef();
 
     useImperativeHandle(ref, () => {
-      const targetStyle = innerRef.current.style;
+      function applyStyle(key, value) {
+        innerRef.current && (innerRef.current.style[key] = value);
+      }
+
       return {
         setStyle: (style) => {
           if (!style) return;
 
           const keys = Object.keys(style);
           keys.forEach((key) => {
-            targetStyle[key] = style[key];
+            applyStyle(key, style[key]);
           });
         },
         setDuration: (duration) => {
-          targetStyle.transitionDuration = duration || '0.2s';
+          applyStyle('transitionDuration', duration || '0.2s');
         },
         setTimingFunction: (timingFunction) => {
           if (!timingFunction) return;
 
-          targetStyle.transitionTimingFunction = timingFunction;
+          applyStyle('transitionTimingFunction', timingFunction);
         },
         setDelay: (delay) => {
           if (!delay) return;
 
-          targetStyle.transitionDelay = delay;
+          applyStyle('transitionDelay', delay);
         },
       };
     });
