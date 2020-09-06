@@ -61,3 +61,31 @@ test('Check style a <Dancer />', async () => {
    */
   expect(dancer.style.transform).toBe('translateX(100px)');
 });
+
+test('Check config a <Dancer />', async () => {
+  function App() {
+    const [ref] = useDancer({
+      defaultStyle: {
+        color: 'red',
+      },
+      duration: '1s',
+      timingFunction: 'linear',
+      delay: '2s',
+    });
+
+    return <Dancer ref={ref} />;
+  }
+  const root = document.createElement('div');
+
+  ReactDOM.render(<App />, root);
+
+  const dancer = root.querySelector('div');
+
+  /**
+   * defualt style
+   */
+  expect(dancer.style.color).toBe('red');
+  expect(dancer.style.transitionDuration).toBe('1s');
+  expect(dancer.style.transitionTimingFunction).toBe('linear');
+  expect(dancer.style.transitionDelay).toBe('2s');
+});
