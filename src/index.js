@@ -17,6 +17,8 @@ const Dancer = memo(
         innerRef.current && (innerRef.current.style[key] = value);
       }
 
+      const perfix = 'transition';
+
       return {
         setStyle: (style) => {
           if (!style) return;
@@ -27,17 +29,17 @@ const Dancer = memo(
           });
         },
         setDuration: (duration) => {
-          applyStyle('transitionDuration', duration || '0.2s');
+          applyStyle(perfix + 'Duration', duration || '0.2s');
         },
         setTimingFunction: (timingFunction) => {
           if (!timingFunction) return;
 
-          applyStyle('transitionTimingFunction', timingFunction);
+          applyStyle(perfix + 'TimingFunction', timingFunction);
         },
         setDelay: (delay) => {
           if (!delay) return;
 
-          applyStyle('transitionDelay', delay);
+          applyStyle(perfix + 'Delay', delay);
         },
       };
     });
