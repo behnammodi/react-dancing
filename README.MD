@@ -117,3 +117,6 @@ Also you can use these 2 links to find best timing function
 
 ## Maintainer
 [Behnam Mohamamdi](https://github.com/behnammodi)
+
+## Donate
+BTC: `1NV1sjQnXwuyHgxQ8G5eWprhxsD5A8yN6r`
