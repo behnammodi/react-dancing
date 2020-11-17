@@ -41,6 +41,7 @@ const Dancer = memo(
 
           applyStyle(perfix + 'Delay', delay);
         },
+        getElement: () => innerRef.current,
       };
     });
 
