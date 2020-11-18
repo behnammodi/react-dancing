@@ -29,7 +29,9 @@ const Dancer = memo(
           });
         },
         setDuration: (duration) => {
-          applyStyle(perfix + 'Duration', duration || '0.2s');
+          if (!duration) return;
+
+          applyStyle(perfix + 'Duration', duration);
         },
         setTimingFunction: (timingFunction) => {
           if (!timingFunction) return;
@@ -58,17 +60,25 @@ const Dancer = memo(
 
 const useDancer = (config) => {
   const ref = useRef();
+  const prevRef = useRef();
 
   useLayoutEffect(() => {
-    const current = ref.current;
+    if (!ref.current) return;
+
+    if (ref.current === prevRef.current) return;
+
+    prevRef.current = ref.current;
+
     config = config || {};
-    current.setStyle(config.defaultStyle);
-    current.setDuration(config.duration);
-    current.setTimingFunction(config.timingFunction);
-    current.setDelay(config.delay);
-  }, []);
+    ref.current.setStyle(config.defaultStyle);
+    ref.current.setDuration(config.duration || '0.2s');
+    ref.current.setTimingFunction(config.timingFunction);
+    ref.current.setDelay(config.delay);
+  });
 
   const play = (style) => {
+    if (!ref.current) return;
+
     ref.current.setStyle(style);
   };
 

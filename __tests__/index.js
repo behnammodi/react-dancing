@@ -89,3 +89,40 @@ test('Check config a <Dancer />', async () => {
   expect(dancer.style.transitionTimingFunction).toBe('linear');
   expect(dancer.style.transitionDelay).toBe('2s');
 });
+
+test('Check exposed item when componet not existed', () => {
+  let spy = null;
+
+  function App() {
+    spy = useDancer();
+    return null;
+  }
+  const root = document.createElement('div');
+
+  ReactDOM.render(<App />, root);
+
+  expect(spy[0]).toHaveProperty('current');
+  expect(spy[0].current).toBe(undefined);
+  expect(spy[1]).toBeInstanceOf(Function);
+});
+
+test('Check exposed item when componet existed', () => {
+  let spy = null;
+
+  function App() {
+    spy = useDancer();
+
+    return <Dancer ref={spy[0]} />;
+  }
+  const root = document.createElement('div');
+
+  ReactDOM.render(<App />, root);
+
+  expect(spy[0]).toHaveProperty('current');
+  expect(spy[0].current).toHaveProperty('setStyle');
+  expect(spy[0].current).toHaveProperty('setDuration');
+  expect(spy[0].current).toHaveProperty('setTimingFunction');
+  expect(spy[0].current).toHaveProperty('setDelay');
+  expect(spy[0].current).toHaveProperty('getElement');
+  expect(spy[1]).toBeInstanceOf(Function);
+});
