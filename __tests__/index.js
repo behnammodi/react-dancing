@@ -54,7 +54,7 @@ test('Check style a <Dancer />', async () => {
    */
   expect(dancer.style.transitionDuration).toBe('0.2s');
 
-  await delay(10);
+  await delay(20);
 
   /**
    * style after run play

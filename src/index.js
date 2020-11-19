@@ -79,7 +79,7 @@ const useDancer = (config) => {
   const play = (style) => {
     if (!ref.current) return;
 
-    ref.current.setStyle(style);
+    requestAnimationFrame(() => ref.current.setStyle(style));
   };
 
   return [ref, play];
