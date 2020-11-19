@@ -45,7 +45,7 @@ const Dancer = memo(
         },
         getElement: () => innerRef.current,
       };
-    });
+    }, []);
 
     const cloneProps = {};
     for (let prop in props) {
