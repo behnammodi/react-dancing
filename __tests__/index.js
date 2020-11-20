@@ -120,9 +120,6 @@ test('Check exposed item when componet existed', () => {
 
   expect(spy[0]).toHaveProperty('current');
   expect(spy[0].current).toHaveProperty('setStyle');
-  expect(spy[0].current).toHaveProperty('setDuration');
-  expect(spy[0].current).toHaveProperty('setTimingFunction');
-  expect(spy[0].current).toHaveProperty('setDelay');
   expect(spy[0].current).toHaveProperty('getElement');
   expect(spy[1]).toBeInstanceOf(Function);
 });

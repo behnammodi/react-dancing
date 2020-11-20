@@ -12,45 +12,22 @@ const Dancer = memo(
   forwardRef((props, ref) => {
     const innerRef = useRef();
 
-    useImperativeHandle(ref, () => {
-      function applyStyle(key, value) {
-        innerRef.current && (innerRef.current.style[key] = value);
-      }
-
-      const perfix = 'transition';
-
-      return {
+    useImperativeHandle(
+      ref,
+      () => ({
         setStyle: (style) => {
           if (!style) return;
 
-          const keys = Object.keys(style);
-          keys.forEach((key) => {
-            applyStyle(key, style[key]);
-          });
-        },
-        setDuration: (duration) => {
-          if (!duration) return;
+          if (!innerRef.current) return;
 
-          applyStyle(perfix + 'Duration', duration);
-        },
-        setTimingFunction: (timingFunction) => {
-          if (!timingFunction) return;
-
-          applyStyle(perfix + 'TimingFunction', timingFunction);
-        },
-        setDelay: (delay) => {
-          if (!delay) return;
-
-          applyStyle(perfix + 'Delay', delay);
+          for (let key in style) innerRef.current.style[key] = style[key];
         },
         getElement: () => innerRef.current,
-      };
-    }, []);
+      }),
+      []
+    );
 
-    const cloneProps = {};
-    for (let prop in props) {
-      cloneProps[prop] = props[prop];
-    }
+    const cloneProps = Object.assign({}, props);
     cloneProps.ref = innerRef;
     delete cloneProps.children;
 
@@ -69,11 +46,20 @@ const useDancer = (config) => {
 
     prevRef.current = ref.current;
 
+    const perfix = 'transition';
+
     config = config || {};
-    ref.current.setStyle(config.defaultStyle);
-    ref.current.setDuration(config.duration || '0.2s');
-    ref.current.setTimingFunction(config.timingFunction);
-    ref.current.setDelay(config.delay);
+
+    const cloneDefaultStyle = Object.assign({}, config.defaultStyle);
+
+    cloneDefaultStyle[perfix + 'Duration'] = config.duration || '0.2s';
+
+    if ('timingFunction' in config)
+      cloneDefaultStyle[perfix + 'TimingFunction'] = config.timingFunction;
+
+    if ('delay' in config) cloneDefaultStyle[perfix + 'Delay'] = config.delay;
+
+    ref.current.setStyle(cloneDefaultStyle);
   });
 
   const play = (style) => {
