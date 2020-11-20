@@ -46,20 +46,19 @@ const useDancer = (config) => {
 
     prevRef.current = ref.current;
 
-    const perfix = 'transition';
-
     config = config || {};
 
-    const cloneDefaultStyle = Object.assign({}, config.defaultStyle);
-
-    cloneDefaultStyle[perfix + 'Duration'] = config.duration || '0.2s';
-
-    if ('timingFunction' in config)
-      cloneDefaultStyle[perfix + 'TimingFunction'] = config.timingFunction;
-
-    if ('delay' in config) cloneDefaultStyle[perfix + 'Delay'] = config.delay;
-
-    ref.current.setStyle(cloneDefaultStyle);
+    ref.current.setStyle(
+      Object.assign(
+        {},
+        {
+          transitionDuration: config.duration || '0.2s',
+          transitionTimingFunction: config.timingFunction,
+          transitionDelay: config.delay,
+        },
+        config.defaultStyle
+      )
+    );
   });
 
   const play = (style) => {
