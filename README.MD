@@ -25,6 +25,7 @@
 </a>
 
 ## Installation
+
 Using npm:
 
 ```bash
@@ -69,6 +70,8 @@ function App() {
 ## Change duration
 
 By Default `duration` is `200ms` but you can change it.
+
+Values ex: `1.5s`, `1500ms`, `inherit`, `initial`, `unset` or `null`
 
 ```jsx
 const [ref, play] = useDancer({
@@ -115,8 +118,24 @@ Also you can use these 2 links to find best timing function
 
 [cubic-bezier.com](https://cubic-bezier.com/)
 
+## Add delay to start animation
+
+By Default `duration` is `0` but you can change it.
+
+Values ex: `1.5s`, `1500ms`, `inherit`, `initial`, `unset` or `null`
+
+```jsx
+const [ref, play] = useDancer({
+  ...
+  delay: '3s',
+  ...
+});
+```
+
 ## Maintainer
+
 [Behnam Mohamamdi](https://github.com/behnammodi)
 
 ## Donate
+
 BTC: `1NV1sjQnXwuyHgxQ8G5eWprhxsD5A8yN6r`
