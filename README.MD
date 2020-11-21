@@ -120,7 +120,7 @@ Also you can use these 2 links to find best timing function
 
 ## Add delay to start animation
 
-By Default `duration` is `0` but you can change it.
+By Default `delay` is `0` but you can change it.
 
 Values ex: `1.5s`, `1500ms`, `inherit`, `initial`, `unset` or `null`
 
