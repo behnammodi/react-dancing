@@ -119,7 +119,6 @@ test('Check exposed item when componet existed', () => {
   ReactDOM.render(<App />, root);
 
   expect(spy[0]).toHaveProperty('current');
-  expect(spy[0].current).toHaveProperty('setStyle');
-  expect(spy[0].current).toHaveProperty('getElement');
+  expect(spy[0].current).toBeInstanceOf(HTMLElement);
   expect(spy[1]).toBeInstanceOf(Function);
 });

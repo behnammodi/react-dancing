@@ -5,30 +5,12 @@ import {
   forwardRef,
   createElement,
   useLayoutEffect,
-  useImperativeHandle,
 } from 'react';
 
 const Dancer = memo(
   forwardRef((props, ref) => {
-    const innerRef = useRef();
-
-    useImperativeHandle(
-      ref,
-      () => ({
-        setStyle: (style) => {
-          if (!style) return;
-
-          if (!innerRef.current) return;
-
-          for (let key in style) innerRef.current.style[key] = style[key];
-        },
-        getElement: () => innerRef.current,
-      }),
-      []
-    );
-
     const cloneProps = Object.assign({}, props);
-    cloneProps.ref = innerRef;
+    cloneProps.ref = ref;
     delete cloneProps.children;
 
     return createElement('div', cloneProps, props.children);
@@ -39,6 +21,10 @@ const useDancer = (config) => {
   const ref = useRef();
   const prevRef = useRef();
 
+  const setStyle = (style, element) => {
+    for (let key in style) element.style[key] = style[key];
+  };
+
   useLayoutEffect(() => {
     if (!ref.current) return;
 
@@ -48,7 +34,7 @@ const useDancer = (config) => {
 
     config = config || {};
 
-    ref.current.setStyle(
+    setStyle(
       Object.assign(
         {},
         {
@@ -57,14 +43,17 @@ const useDancer = (config) => {
           transitionDelay: config.delay,
         },
         config.defaultStyle
-      )
+      ),
+      ref.current
     );
   });
 
   const play = (style) => {
+    if (!style) return;
+
     if (!ref.current) return;
 
-    requestAnimationFrame(() => ref.current.setStyle(style));
+    requestAnimationFrame(() => setStyle(style, ref.current));
   };
 
   return [ref, play];
