@@ -33,14 +33,16 @@ const useDancer = (config) => {
     prevRef.current = ref.current;
 
     config = config || {};
+    config.duration = config.duration || 200;
+    config.delay = config.delay || 0;
 
     setStyle(
       Object.assign(
         {},
         {
-          transitionDuration: config.duration || '0.2s',
+          transitionDuration: config.duration + 'ms',
           transitionTimingFunction: config.timingFunction,
-          transitionDelay: config.delay,
+          transitionDelay: config.delay + 'ms',
         },
         config.defaultStyle
       ),

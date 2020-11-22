@@ -69,14 +69,12 @@ function App() {
 
 ## Change duration
 
-By Default `duration` is `200ms` but you can change it.
-
-Values ex: `1.5s`, `1500ms`, `inherit`, `initial`, `unset`
+By Default `duration` is `200` ms but you can change it.
 
 ```jsx
 const [ref, play] = useDancer({
   ...
-  duration: '3s',
+  duration: 3000, // 3 sec
   ...
 });
 ```
@@ -120,14 +118,12 @@ Also you can use these 2 links to find best timing function
 
 ## Add delay to start animation
 
-By Default `delay` is `0s` but you can change it.
-
-Values ex: `1.5s`, `1500ms`, `inherit`, `initial` and `unset`
+By Default `delay` is `0` ms but you can change it.
 
 ```jsx
 const [ref, play] = useDancer({
   ...
-  delay: '3s',
+  delay: 2000, // 2 sec
   ...
 });
 ```

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 declare function useDancer(config: {
   defaultStyle?: object;
-  duration?: string;
+  duration?: number;
   timingFunction?: string;
-  delay?: string;
+  delay?: number;
   // TODO: need to complete
 }): [object, (style: object) => void];
 

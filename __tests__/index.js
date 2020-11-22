@@ -52,7 +52,7 @@ test('Check style a <Dancer />', async () => {
   /**
    * defualt style
    */
-  expect(dancer.style.transitionDuration).toBe('0.2s');
+  expect(dancer.style.transitionDuration).toBe('200ms');
 
   await delay(20);
 
@@ -68,9 +68,9 @@ test('Check config a <Dancer />', async () => {
       defaultStyle: {
         color: 'red',
       },
-      duration: '1s',
+      duration: 1000,
       timingFunction: 'linear',
-      delay: '2s',
+      delay: 2000,
     });
 
     return <Dancer ref={ref} />;
@@ -85,9 +85,9 @@ test('Check config a <Dancer />', async () => {
    * defualt style
    */
   expect(dancer.style.color).toBe('red');
-  expect(dancer.style.transitionDuration).toBe('1s');
+  expect(dancer.style.transitionDuration).toBe('1000ms');
   expect(dancer.style.transitionTimingFunction).toBe('linear');
-  expect(dancer.style.transitionDelay).toBe('2s');
+  expect(dancer.style.transitionDelay).toBe('2000ms');
 });
 
 test('Check exposed item when componet not existed', () => {
