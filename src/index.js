@@ -33,7 +33,7 @@ const useDancer = (config) => {
     prevRef.current = ref.current;
 
     config = config || {};
-    config.duration = config.duration || 200;
+    config.duration = config.duration == null ? 200 : config.duration;
     config.delay = config.delay || 0;
 
     setStyle(
