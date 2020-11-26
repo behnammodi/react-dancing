@@ -25,24 +25,24 @@ const Dancer = memo(
 
 const useDancer = (config) => {
   const ref = useRef();
-  const prevRef = useRef();
-  const refConfig = useRef();
   const refRaf = useRef();
+  const refTime = useRef();
+  const refConfig = useRef();
   const refTimeout = useRef();
-  const time = useRef();
+  const refCurrentDancer = useRef();
 
   useLayoutEffect(() => {
     if (!ref.current) return;
 
-    if (ref.current === prevRef.current) return;
+    if (ref.current === refCurrentDancer.current) return;
 
-    prevRef.current = ref.current;
+    refCurrentDancer.current = ref.current;
 
     config = config || {};
     config.duration = config.duration == null ? 200 : config.duration;
     config.delay = config.delay || 0;
     config.timingFunction = config.timingFunction || ((x) => x);
-    time.current = config.defaultValue = config.defaultValue || 0;
+    refTime.current = config.defaultValue = config.defaultValue || 0;
     config.interpolate = config.interpolate || {};
 
     refConfig.current = config;
@@ -72,26 +72,26 @@ const useDancer = (config) => {
 
       const slice = 1 / (refConfig.current.duration / FPS);
 
-      const isForward = toValue > time.current;
+      const isForward = toValue > refTime.current;
 
       function animate() {
         const nextStyle = {};
         for (let prop in interpolate) {
-          nextStyle[prop] = interpolate[prop](timingFunction(time.current));
+          nextStyle[prop] = interpolate[prop](timingFunction(refTime.current));
         }
 
         setStyle(nextStyle, ref.current);
 
         if (isForward) {
-          if (time.current < toValue) {
-            time.current += slice;
-            if (time.current > toValue) time.current = toValue;
+          if (refTime.current < toValue) {
+            refTime.current += slice;
+            if (refTime.current > toValue) refTime.current = toValue;
             raf(animate);
           }
         } else {
-          if (time.current > toValue) {
-            time.current -= slice;
-            if (time.current < toValue) time.current = toValue;
+          if (refTime.current > toValue) {
+            refTime.current -= slice;
+            if (refTime.current < toValue) refTime.current = toValue;
             raf(animate);
           }
         }
