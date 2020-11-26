@@ -1,3 +1,5 @@
+For old Version of `react-dancing` go to [react-dancing version 0](https://github.com/behnammodi/react-dancing/tree/version-0)
+
 [![NPM](https://nodei.co/npm/react-dancing.png)](https://nodei.co/npm/react-dancing/)
 
 <a href="https://www.npmjs.com/package/react-dancing">
@@ -40,21 +42,23 @@ npm install react-dancing
 
 ## Usage
 
-A simple demo of `react-dancing` [DEMO](https://codesandbox.io/s/react-dancing-first-sample-1rnky)
-
 ```jsx
 import React from 'react';
 import { Dancer, useDancer } from 'react-dancing';
 
 function App() {
-  const [ref, play] = useDancer();
+  const [ref, start] = useDancer({
+    interpolate: {
+      transform: (x) => `translateX(${x * 100}px)`,
+    },
+  });
 
   const handleGo = () => {
-    play({ transform: 'translateX(100px)' });
+    start(1);
   };
 
   const handleBack = () => {
-    play({ transform: 'translateX(0px)' });
+    start(0);
   };
 
   return (
@@ -67,67 +71,18 @@ function App() {
 }
 ```
 
-## Change duration
+## useDancer config
 
-By Default `duration` is `200` ms but you can change it.
+| Prop | Default | Desc |
+|---|---|---|
+| interpolate | {} | type is `object` and you want interpolate `x` to styles
+| duration | 200 | type is `number` and base on milisecond
+| delay | 0 | type is `number` and base on milisecond
+| timingFunction | x => x | type is `function` you can find smaple in [easings.net](https://easings.net/)
+| defaultValue | 0 | type is `number`, if you want to reverse aninmation set `1` and run `start(0)`
 
-```jsx
-const [ref, play] = useDancer({
-  ...
-  duration: 3000, // 3 sec
-  ...
-});
-```
 
-## Add default style
-
-If you want to add style in initial time and without
-animation, you can use `defaultStyle` in `useDancer` config.
-
-```jsx
-const [ref, play] = useDancer({
-  ...
-  defaultStyle: { color: "#ff0000" },
-  ...
-});
-```
-
-## Change timing function
-
-By Default `timingFunction` is `ease` but you can change it to:
-
-|         |          |             |        |            |          |            |                   |         |         |       |
-| :-----: | :------: | :---------: | :----: | :--------: | :------: | :--------: | :---------------: | :-----: | :-----: | :---: |
-| ease-in | ease-out | ease-in-out | linear | step-start | step-end | steps(...) | cubic-bezier(...) | inherit | initial | unset |
-
-[More Info MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)
-
-```jsx
-const [ref, play] = useDancer({
-  ...
-  timingFunction: 'ease-in-out',
-  ...
-});
-```
-
-Also you can use these 2 links to find best timing function
-
-[easings.net](https://easings.net/)
-
-[cubic-bezier.com](https://cubic-bezier.com/)
-
-## Add delay to start animation
-
-By Default `delay` is `0` ms but you can change it.
-
-```jsx
-const [ref, play] = useDancer({
-  ...
-  delay: 2000, // 2 sec
-  ...
-});
-```
-
+You can see more sample of `react-dancing` in [here](https://codesandbox.io/s/react-dancing-version-1-8cdli)
 ## Maintainer
 
 [Behnam Mohamamdi](https://github.com/behnammodi)

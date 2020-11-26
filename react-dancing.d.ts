@@ -1,12 +1,16 @@
 import * as React from 'react';
 
+type start = (toValue: number) => void;
+type stop = () => void;
+
 declare function useDancer(config: {
-  defaultStyle?: object;
+  defaultValue?: number;
   duration?: number;
-  timingFunction?: string;
+  timingFunction?: (x: number) => number;
   delay?: number;
+  interpolate?: object;
   // TODO: need to complete
-}): [object, (style: object) => void];
+}): [object, start, stop];
 
 // TODO: need to complete
 interface DancerProps extends React.HTMLAttributes<HTMLDivElement> {

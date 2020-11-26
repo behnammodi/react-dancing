@@ -33,10 +33,14 @@ test('Snapshot a <Dancer /> with some props', () => {
 
 test('Check style a <Dancer />', async () => {
   function App() {
-    const [ref, play] = useDancer();
+    const [ref, start] = useDancer({
+      interpolate: {
+        transform: (x) => `translateX(${x * 100}px)`,
+      },
+    });
 
     useEffect(() => {
-      play({ transform: 'translateX(100px)' });
+      start(1)
     }, []);
 
     return (
@@ -49,45 +53,12 @@ test('Check style a <Dancer />', async () => {
 
   const dancer = root.querySelector('div');
 
-  /**
-   * defualt style
-   */
-  expect(dancer.style.transitionDuration).toBe('200ms');
-
-  await delay(20);
+  await delay(300);
 
   /**
    * style after run play
    */
   expect(dancer.style.transform).toBe('translateX(100px)');
-});
-
-test('Check config a <Dancer />', async () => {
-  function App() {
-    const [ref] = useDancer({
-      defaultStyle: {
-        color: 'red',
-      },
-      duration: 1000,
-      timingFunction: 'linear',
-      delay: 2000,
-    });
-
-    return <Dancer ref={ref} />;
-  }
-  const root = document.createElement('div');
-
-  ReactDOM.render(<App />, root);
-
-  const dancer = root.querySelector('div');
-
-  /**
-   * defualt style
-   */
-  expect(dancer.style.color).toBe('red');
-  expect(dancer.style.transitionDuration).toBe('1000ms');
-  expect(dancer.style.transitionTimingFunction).toBe('linear');
-  expect(dancer.style.transitionDelay).toBe('2000ms');
 });
 
 test('Check exposed item when componet not existed', () => {
@@ -104,6 +75,7 @@ test('Check exposed item when componet not existed', () => {
   expect(spy[0]).toHaveProperty('current');
   expect(spy[0].current).toBe(undefined);
   expect(spy[1]).toBeInstanceOf(Function);
+  expect(spy[2]).toBeInstanceOf(Function);
 });
 
 test('Check exposed item when componet existed', () => {
@@ -121,4 +93,5 @@ test('Check exposed item when componet existed', () => {
   expect(spy[0]).toHaveProperty('current');
   expect(spy[0].current).toBeInstanceOf(HTMLElement);
   expect(spy[1]).toBeInstanceOf(Function);
+  expect(spy[2]).toBeInstanceOf(Function);
 });
