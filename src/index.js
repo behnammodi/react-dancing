@@ -24,89 +24,97 @@ const Dancer = memo(
 );
 
 const useDancer = (config) => {
-  const ref = useRef();
-  const refRaf = useRef();
-  const refTime = useRef();
-  const refConfig = useRef();
-  const refTimeout = useRef();
-  const refCurrentDancer = useRef();
+  const keyDancer = 0;
+  const keyRaf = 1;
+  const keyTime = 2;
+  const keyConfig = 3;
+  const keyTimeout = 4;
+  const keyCurrentDancer = 5;
+  const { current: refs } = useRef(new Map());
+
+  const getRef = (key) => refs.get(key);
+  const setRef = (key, value) => refs.set(key, value);
 
   useLayoutEffect(() => {
-    if (!ref.current) return;
+    if (!getRef(keyDancer)) return;
 
-    if (ref.current === refCurrentDancer.current) return;
+    if (getRef(keyDancer) === getRef(keyCurrentDancer)) return;
 
-    refCurrentDancer.current = ref.current;
+    setRef(keyCurrentDancer, getRef(keyDancer));
 
     config = config || {};
     config.duration = config.duration == null ? 200 : config.duration;
     config.delay = config.delay || 0;
     config.timingFunction = config.timingFunction || ((x) => x);
     config.interpolate = config.interpolate || {};
+    config.defaultValue = config.defaultValue || 0;
 
-    refTime.current = config.defaultValue = config.defaultValue || 0;
-    refConfig.current = config;
+    const { defaultValue, interpolate, timingFunction } = config;
+
+    setRef(keyTime, defaultValue);
+    setRef(keyConfig, config);
 
     const defaultStyle = {};
-    for (let prop in config.interpolate)
-      defaultStyle[prop] = config.interpolate[prop](
-        config.timingFunction(config.defaultValue)
-      );
+    for (let key in interpolate)
+      defaultStyle[key] = interpolate[key](timingFunction(defaultValue));
 
-    setStyle(defaultStyle, ref.current);
+    setStyle(defaultStyle, getRef(keyDancer));
   });
 
   const start = (toValue) => {
-    if (!ref.current) return;
+    if (!getRef(keyDancer)) return;
 
     if (toValue < 0 || toValue > 1) return;
 
-    clearTimeout(refTimeout.current);
-    refTimeout.current = setTimeout(() => {
-      cancelAnimationFrame(refRaf.current);
+    const { interpolate, timingFunction, duration } = getRef(keyConfig);
 
-      const interpolate = refConfig.current.interpolate;
-      const timingFunction = refConfig.current.timingFunction;
-      const raf = (handler) =>
-        (refRaf.current = requestAnimationFrame(handler));
+    clearTimeout(getRef(keyTimeout));
+    setRef(
+      keyTimeout,
+      setTimeout(() => {
+        cancelAnimationFrame(getRef(keyRaf));
 
-      const slice = 1 / (refConfig.current.duration / FPS);
+        const raf = (handler) =>
+          setRef(keyRaf, requestAnimationFrame(handler));
 
-      const isForward = toValue > refTime.current;
+        const slice = 1 / (duration / FPS);
 
-      function animate() {
-        const nextStyle = {};
+        const isForward = toValue > getRef(keyTime);
 
-        for (let prop in interpolate)
-          nextStyle[prop] = interpolate[prop](timingFunction(refTime.current));
+        function animate() {
+          const nextStyle = {};
 
-        setStyle(nextStyle, ref.current);
+          for (let key in interpolate)
+            nextStyle[key] = interpolate[key](timingFunction(getRef(keyTime)));
 
-        if (isForward) {
-          if (refTime.current < toValue) {
-            refTime.current += slice;
-            if (refTime.current > toValue) refTime.current = toValue;
-            raf(animate);
-          }
-        } else {
-          if (refTime.current > toValue) {
-            refTime.current -= slice;
-            if (refTime.current < toValue) refTime.current = toValue;
-            raf(animate);
+          setStyle(nextStyle, getRef(keyDancer));
+
+          if (isForward) {
+            if (getRef(keyTime) < toValue) {
+              setRef(keyTime, getRef(keyTime) + slice);
+              if (getRef(keyTime) > toValue) setRef(keyTime, toValue);
+              raf(animate);
+            }
+          } else {
+            if (getRef(keyTime) > toValue) {
+              setRef(keyTime, getRef(keyTime) - slice);
+              if (getRef(keyTime) < toValue) setRef(keyTime, toValue);
+              raf(animate);
+            }
           }
         }
-      }
 
-      raf(animate);
-    }, refConfig.current.delay);
+        raf(animate);
+      }, config.delay)
+    );
   };
 
   const stop = () => {
-    clearTimeout(refTimeout.current);
-    cancelAnimationFrame(refRaf.current);
+    clearTimeout(getRef(keyTimeout));
+    cancelAnimationFrame(getRef(keyRaf));
   };
 
-  return [ref, start, stop];
+  return [(ref) => setRef(keyDancer, ref), start, stop];
 };
 
 export { useDancer, Dancer };
