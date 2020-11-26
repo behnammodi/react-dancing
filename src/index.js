@@ -42,9 +42,9 @@ const useDancer = (config) => {
     config.duration = config.duration == null ? 200 : config.duration;
     config.delay = config.delay || 0;
     config.timingFunction = config.timingFunction || ((x) => x);
-    refTime.current = config.defaultValue = config.defaultValue || 0;
     config.interpolate = config.interpolate || {};
-
+    
+    refTime.current = config.defaultValue = config.defaultValue || 0;
     refConfig.current = config;
 
     const currentStyle = {};
