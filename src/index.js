@@ -9,6 +9,10 @@ import {
 
 const FPS = 1000 / 60;
 
+const setStyle = (style, element) => {
+  for (let key in style) element.style[key] = style[key];
+};
+
 const Dancer = memo(
   forwardRef((props, ref) => {
     const cloneProps = Object.assign({}, props);
@@ -26,10 +30,6 @@ const useDancer = (config) => {
   const refRaf = useRef();
   const refTimeout = useRef();
   const time = useRef();
-
-  const setStyle = (style, element) => {
-    for (let key in style) element.style[key] = style[key];
-  };
 
   useLayoutEffect(() => {
     if (!ref.current) return;
