@@ -1,4 +1,4 @@
-For old Version of `react-dancing` go to [react-dancing version 0](https://github.com/behnammodi/react-dancing/tree/version-0)
+For old version of `react-dancing` please go to [react-dancing version 0](https://github.com/behnammodi/react-dancing/tree/version-0)
 
 [![NPM](https://nodei.co/npm/react-dancing.png)](https://nodei.co/npm/react-dancing/)
 
