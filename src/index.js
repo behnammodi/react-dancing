@@ -43,18 +43,17 @@ const useDancer = (config) => {
     config.delay = config.delay || 0;
     config.timingFunction = config.timingFunction || ((x) => x);
     config.interpolate = config.interpolate || {};
-    
+
     refTime.current = config.defaultValue = config.defaultValue || 0;
     refConfig.current = config;
 
-    const currentStyle = {};
-    for (let prop in config.interpolate) {
-      currentStyle[prop] = config.interpolate[prop](
+    const defaultStyle = {};
+    for (let prop in config.interpolate)
+      defaultStyle[prop] = config.interpolate[prop](
         config.timingFunction(config.defaultValue)
       );
-    }
 
-    setStyle(currentStyle, ref.current);
+    setStyle(defaultStyle, ref.current);
   });
 
   const start = (toValue) => {
@@ -76,9 +75,9 @@ const useDancer = (config) => {
 
       function animate() {
         const nextStyle = {};
-        for (let prop in interpolate) {
+        
+        for (let prop in interpolate)
           nextStyle[prop] = interpolate[prop](timingFunction(refTime.current));
-        }
 
         setStyle(nextStyle, ref.current);
 
