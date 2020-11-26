@@ -61,6 +61,7 @@ const useDancer = (config) => {
 
     if (toValue < 0 || toValue > 1) return;
 
+    clearTimeout(refTimeout.current);
     refTimeout.current = setTimeout(() => {
       cancelAnimationFrame(refRaf.current);
 
@@ -75,7 +76,7 @@ const useDancer = (config) => {
 
       function animate() {
         const nextStyle = {};
-        
+
         for (let prop in interpolate)
           nextStyle[prop] = interpolate[prop](timingFunction(refTime.current));
 
