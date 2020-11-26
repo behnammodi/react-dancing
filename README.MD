@@ -36,8 +36,9 @@ npm install react-dancing
 
 ## Big advantages
 
+- Animation base on `requestAnimationFrame`
 - Animation without re-render component
-- Less than 0.6KB (GZIP)
+- Less than 0.7KB (GZIP) [Bundlephobia](https://bundlephobia.com/result?p=react-dancing)
 - Without dependency
 
 ## Usage
@@ -47,25 +48,18 @@ import React from 'react';
 import { Dancer, useDancer } from 'react-dancing';
 
 function App() {
-  const [ref, start] = useDancer({
+  const [ref, start, stop] = useDancer({
     interpolate: {
       transform: (x) => `translateX(${x * 100}px)`,
     },
   });
 
-  const handleGo = () => {
-    start(1);
-  };
-
-  const handleBack = () => {
-    start(0);
-  };
-
   return (
     <div>
       <Dancer ref={ref}>React Dancing</Dancer>
-      <button onClick={handleBack}>Back</button>
-      <button onClick={handleGo}>Go</button>
+      <button onClick={() => start(0)}>Back</button>
+      <button onClick={() => start(1)}>Go</button>
+      <button onClick={() => stop()}>Stop</button>
     </div>
   );
 }
@@ -73,16 +67,16 @@ function App() {
 
 ## useDancer config
 
-| Prop | Default | Desc |
-|---|---|---|
-| interpolate | {} | type is `object` and you want interpolate `x` to styles
-| duration | 200 | type is `number` and base on milisecond
-| delay | 0 | type is `number` and base on milisecond
-| timingFunction | x => x | type is `function` you can find smaple in [easings.net](https://easings.net/)
-| defaultValue | 0 | type is `number`, if you want to reverse aninmation set `1` and run `start(0)`
-
+| Prop           | Default | Desc                                                                                               |
+| -------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| interpolate    | {}      | type is `object` and you must interpolate `x` to styles, ex: `` { height: x => `${x * 500}px` } `` |
+| duration       | 200     | type is `number` and base on milisecond                                                            |
+| delay          | 0       | type is `number` and base on milisecond                                                            |
+| timingFunction | x => x  | type is `function` you can find sample in [easings.net](https://easings.net/)                      |
+| defaultValue   | 0       | type is `number`, if you want to reverse aninmation set `1` and run `start(0)`                     |
 
 You can see more sample of `react-dancing` in [here](https://codesandbox.io/s/react-dancing-version-1-8cdli)
+
 ## Maintainer
 
 [Behnam Mohamamdi](https://github.com/behnammodi)

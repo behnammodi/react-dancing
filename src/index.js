@@ -4,8 +4,8 @@ import {
   useRef,
   forwardRef,
   createElement,
-  useLayoutEffect
-} from "react";
+  useLayoutEffect,
+} from 'react';
 
 const FPS = 1000 / 60;
 
@@ -15,7 +15,7 @@ const Dancer = memo(
     cloneProps.ref = ref;
     delete cloneProps.children;
 
-    return createElement("div", cloneProps, props.children);
+    return createElement('div', cloneProps, props.children);
   })
 );
 
