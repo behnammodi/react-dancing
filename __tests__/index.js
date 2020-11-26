@@ -40,7 +40,7 @@ test('Check style a <Dancer />', async () => {
     });
 
     useEffect(() => {
-      start(1)
+      start(1);
     }, []);
 
     return (
@@ -72,7 +72,7 @@ test('Check exposed item when componet not existed', () => {
 
   ReactDOM.render(<App />, root);
 
-  expect(spy[0]).toHaveProperty('current');
+  expect(spy[0]).toBeInstanceOf(Function);
   expect(spy[0].current).toBe(undefined);
   expect(spy[1]).toBeInstanceOf(Function);
   expect(spy[2]).toBeInstanceOf(Function);
@@ -90,7 +90,7 @@ test('Check exposed item when componet existed', () => {
 
   ReactDOM.render(<App />, root);
 
-  expect(spy[0]).toHaveProperty('current');
+  expect(spy[0]).toBeInstanceOf(Function);
   expect(spy[0].current).toBeInstanceOf(HTMLElement);
   expect(spy[1]).toBeInstanceOf(Function);
   expect(spy[2]).toBeInstanceOf(Function);
