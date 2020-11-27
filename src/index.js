@@ -10,7 +10,7 @@ const useDancer = ({
 } = {}) => {
   const KEY_DANCER = 0;
   const KEY_RAF = 1;
-  const KEY_TIME = 2;
+  const KEY_VALUE = 2;
   const KEY_TIMEOUT = 3;
   const KEY_CURRENT_DANCER = 4;
   const { current: refs } = useRef(new Map());
@@ -31,7 +31,7 @@ const useDancer = ({
 
     setRef(KEY_CURRENT_DANCER, getRef(KEY_DANCER));
 
-    setRef(KEY_TIME, defaultValue);
+    setRef(KEY_VALUE, defaultValue);
 
     const defaultStyle = {};
     for (let key in interpolate)
@@ -50,29 +50,41 @@ const useDancer = ({
       KEY_TIMEOUT,
       setTimeout(() => {
         cancelAnimationFrame(getRef(KEY_RAF));
-        const FPS = 1000 / 60;
-        const slice = 1 / (duration / FPS);
+        const isForward = toValue > getRef(KEY_VALUE);
 
-        const isForward = toValue > getRef(KEY_TIME);
+        const previousValue =
+          getRef(KEY_VALUE) === 0 ? 0 : duration * getRef(KEY_VALUE);
 
-        function animate() {
-          const nextStyle = {};
+        let firstTime = null;
+        function animate(time) {
+          if (firstTime === null) {
+            firstTime = time;
+          } else {
+            const nextStyle = {};
+            for (let key in interpolate)
+              nextStyle[key] = interpolate[key](
+                timingFunction(getRef(KEY_VALUE))
+              );
 
-          for (let key in interpolate)
-            nextStyle[key] = interpolate[key](timingFunction(getRef(KEY_TIME)));
+            setStyle(nextStyle, getRef(KEY_DANCER));
+          }
 
-          setStyle(nextStyle, getRef(KEY_DANCER));
+          let now = time - firstTime;
 
           if (isForward) {
-            if (getRef(KEY_TIME) < toValue) {
-              setRef(KEY_TIME, getRef(KEY_TIME) + slice);
-              if (getRef(KEY_TIME) > toValue) setRef(KEY_TIME, toValue);
+            if (getRef(KEY_VALUE) < toValue) {
+              now = now + previousValue;
+              let value = now / duration;
+              if (value > toValue) value = toValue;
+              setRef(KEY_VALUE, value);
               raf(animate);
             }
           } else {
-            if (getRef(KEY_TIME) > toValue) {
-              setRef(KEY_TIME, getRef(KEY_TIME) - slice);
-              if (getRef(KEY_TIME) < toValue) setRef(KEY_TIME, toValue);
+            if (getRef(KEY_VALUE) > toValue) {
+              now = previousValue - now;
+              let value = now / duration;
+              if (value < toValue) value = toValue;
+              setRef(KEY_VALUE, value);
               raf(animate);
             }
           }

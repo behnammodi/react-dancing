@@ -38,7 +38,7 @@ npm install react-dancing
 
 - Animation base on `requestAnimationFrame`
 - Animation without re-render component
-- Less than 0.5 KB 💪 😀  [bundlephobia](https://bundlephobia.com/result?p=react-dancing)
+- Less than 0.6 KB 💪 😀  [bundlephobia](https://bundlephobia.com/result?p=react-dancing)
 - Without dependency
 
 ## Usage
