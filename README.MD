@@ -45,7 +45,7 @@ npm install react-dancing
 
 ```jsx
 import React from 'react';
-import { Dancer, useDancer } from 'react-dancing';
+import { useDancer } from 'react-dancing';
 
 function App() {
   const [ref, start, stop] = useDancer({
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div>
-      <Dancer ref={ref}>React Dancing</Dancer>
+      <div ref={ref}>React Dancing</div>
       <button onClick={() => start(0)}>Back</button>
       <button onClick={() => start(1)}>Go</button>
       <button onClick={() => stop()}>Stop</button>

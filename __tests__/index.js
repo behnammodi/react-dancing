@@ -2,15 +2,15 @@
 import '@babel/polyfill';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Dancer, useDancer } from '../src';
+import { useDancer } from '../src';
 import { create } from 'react-test-renderer';
 
 const delay = (timeout) => new Promise((done) => setTimeout(done, timeout));
 
-test('Snapshot a simple <Dancer />', () => {
+test('Snapshot a simple useDancer', () => {
   function App() {
     const [ref] = useDancer();
-    return <Dancer ref={ref}></Dancer>;
+    return <div ref={ref}></div>;
   }
 
   const component = create(<App />);
@@ -18,12 +18,10 @@ test('Snapshot a simple <Dancer />', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Snapshot a <Dancer /> with some props', () => {
+test('Snapshot a useDancer with some props', () => {
   function App() {
     const [ref] = useDancer();
-    return (
-      <Dancer ref={ref} className="a" id="b" style={{ margin: 100 }}></Dancer>
-    );
+    return <div ref={ref} className="a" id="b" style={{ margin: 100 }}></div>;
   }
 
   const component = create(<App />);
@@ -31,7 +29,7 @@ test('Snapshot a <Dancer /> with some props', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Check style a <Dancer />', async () => {
+test('Check style a useDancer', async () => {
   function App() {
     const [ref, start] = useDancer({
       interpolate: {
@@ -43,9 +41,7 @@ test('Check style a <Dancer />', async () => {
       start(1);
     }, []);
 
-    return (
-      <Dancer ref={ref} className="a" id="b" style={{ margin: 100 }}></Dancer>
-    );
+    return <div ref={ref} className="a" id="b" style={{ margin: 100 }}></div>;
   }
   const root = document.createElement('div');
 
@@ -83,7 +79,7 @@ test('Check exposed item when componet existed', () => {
   function App() {
     spy = useDancer();
 
-    return <Dancer ref={spy[0]} />;
+    return <div ref={spy[0]} />;
   }
   const root = document.createElement('div');
 

@@ -1,21 +1,5 @@
 /* eslint-disable react/prop-types, react/display-name */
-import {
-  memo,
-  useRef,
-  forwardRef,
-  createElement,
-  useLayoutEffect,
-} from 'react';
-
-const Dancer = memo(
-  forwardRef((props, ref) => {
-    const cloneProps = Object.assign({}, props);
-    cloneProps.ref = ref;
-    delete cloneProps.children;
-
-    return createElement('div', cloneProps, props.children);
-  })
-);
+import { useRef, useLayoutEffect } from 'react';
 
 const useDancer = ({
   delay = 0,
@@ -107,4 +91,4 @@ const useDancer = ({
   return [(ref) => setRef(KEY_DANCER, ref), start, stop];
 };
 
-export { useDancer, Dancer };
+export { useDancer };
