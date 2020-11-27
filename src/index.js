@@ -54,36 +54,35 @@ const useDancer = ({
       KEY_TIMEOUT,
       setTimeout(() => {
         cancelAnimationFrame(getRef(KEY_RAF));
-        const isForward = toValue > getRef(KEY_VALUE);
+        const previousValue = getRef(KEY_VALUE);
+        const isForward = toValue > previousValue;
 
-        const previousValue =
-          getRef(KEY_VALUE) === 0 ? 0 : duration * getRef(KEY_VALUE);
+        const previousTime = previousValue === 0 ? 0 : duration * previousValue;
 
-        let firstTime = null;
+        let firstTime;
+        let currentValue = previousValue;
         function animate(time) {
-          if (firstTime === null) {
+          if (firstTime === undefined) {
             firstTime = time;
           } else {
-            setStyleByTranslatedValue(getRef(KEY_VALUE));
+            setStyleByTranslatedValue(currentValue);
           }
 
-          let now = time - firstTime;
+          const now = time - firstTime;
 
           if (isForward) {
-            if (getRef(KEY_VALUE) < toValue) {
-              now = now + previousValue;
-              let value = now / duration;
-              if (value > toValue) value = toValue;
-              setRef(KEY_VALUE, value);
+            if (currentValue < toValue) {
+              currentValue = (now + previousTime) / duration;
+              if (currentValue > toValue) currentValue = toValue;
               raf(animate);
+              setRef(KEY_VALUE, currentValue);
             }
           } else {
-            if (getRef(KEY_VALUE) > toValue) {
-              now = previousValue - now;
-              let value = now / duration;
-              if (value < toValue) value = toValue;
-              setRef(KEY_VALUE, value);
+            if (currentValue > toValue) {
+              currentValue = (previousTime - now) / duration;
+              if (currentValue < toValue) currentValue = toValue;
               raf(animate);
+              setRef(KEY_VALUE, currentValue);
             }
           }
         }
