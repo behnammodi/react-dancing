@@ -24,6 +24,14 @@ const useDancer = ({
 
   const raf = (handler) => setRef(KEY_RAF, requestAnimationFrame(handler));
 
+  const setStyleByTranslatedValue = (value) => {
+    const nextStyle = {};
+    for (let key in interpolate)
+      nextStyle[key] = interpolate[key](timingFunction(value));
+
+    setStyle(nextStyle, getRef(KEY_DANCER));
+  };
+
   useLayoutEffect(() => {
     if (!getRef(KEY_DANCER)) return;
 
@@ -33,11 +41,7 @@ const useDancer = ({
 
     setRef(KEY_VALUE, defaultValue);
 
-    const defaultStyle = {};
-    for (let key in interpolate)
-      defaultStyle[key] = interpolate[key](timingFunction(defaultValue));
-
-    setStyle(defaultStyle, getRef(KEY_DANCER));
+    setStyleByTranslatedValue(defaultValue);
   });
 
   const start = (toValue) => {
@@ -60,13 +64,7 @@ const useDancer = ({
           if (firstTime === null) {
             firstTime = time;
           } else {
-            const nextStyle = {};
-            for (let key in interpolate)
-              nextStyle[key] = interpolate[key](
-                timingFunction(getRef(KEY_VALUE))
-              );
-
-            setStyle(nextStyle, getRef(KEY_DANCER));
+            setStyleByTranslatedValue(getRef(KEY_VALUE));
           }
 
           let now = time - firstTime;
