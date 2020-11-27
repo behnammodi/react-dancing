@@ -24,13 +24,11 @@ const useDancer = ({
   interpolate = {},
   timingFunction = (x) => x,
 } = {}) => {
-  const FPS = 1000 / 60;
   const keyDancer = 0;
   const keyRaf = 1;
   const keyTime = 2;
-  const keyConfig = 3;
-  const keyTimeout = 4;
-  const keyCurrentDancer = 5;
+  const keyTimeout = 3;
+  const keyCurrentDancer = 4;
   const { current: refs } = useRef(new Map());
 
   const getRef = (key) => refs.get(key);
@@ -40,6 +38,8 @@ const useDancer = ({
     for (let key in style) element.style[key] = style[key];
   };
 
+  const raf = (handler) => setRef(keyRaf, requestAnimationFrame(handler));
+
   useLayoutEffect(() => {
     if (!getRef(keyDancer)) return;
 
@@ -48,13 +48,6 @@ const useDancer = ({
     setRef(keyCurrentDancer, getRef(keyDancer));
 
     setRef(keyTime, defaultValue);
-    setRef(keyConfig, {
-      duration,
-      delay,
-      timingFunction,
-      interpolate,
-      defaultValue,
-    });
 
     const defaultStyle = {};
     for (let key in interpolate)
@@ -68,16 +61,12 @@ const useDancer = ({
 
     if (toValue < 0 || toValue > 1) return;
 
-    const { interpolate, timingFunction, duration } = getRef(keyConfig);
-
     clearTimeout(getRef(keyTimeout));
     setRef(
       keyTimeout,
       setTimeout(() => {
         cancelAnimationFrame(getRef(keyRaf));
-
-        const raf = (handler) => setRef(keyRaf, requestAnimationFrame(handler));
-
+        const FPS = 1000 / 60;
         const slice = 1 / (duration / FPS);
 
         const isForward = toValue > getRef(keyTime);
