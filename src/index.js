@@ -7,12 +7,6 @@ import {
   useLayoutEffect,
 } from 'react';
 
-const FPS = 1000 / 60;
-
-const setStyle = (style, element) => {
-  for (let key in style) element.style[key] = style[key];
-};
-
 const Dancer = memo(
   forwardRef((props, ref) => {
     const cloneProps = Object.assign({}, props);
@@ -23,7 +17,14 @@ const Dancer = memo(
   })
 );
 
-const useDancer = (config) => {
+const useDancer = ({
+  delay = 0,
+  duration = 200,
+  defaultValue = 0,
+  interpolate = {},
+  timingFunction = (x) => x,
+} = {}) => {
+  const FPS = 1000 / 60;
   const keyDancer = 0;
   const keyRaf = 1;
   const keyTime = 2;
@@ -35,6 +36,10 @@ const useDancer = (config) => {
   const getRef = (key) => refs.get(key);
   const setRef = (key, value) => refs.set(key, value);
 
+  const setStyle = (style, element) => {
+    for (let key in style) element.style[key] = style[key];
+  };
+
   useLayoutEffect(() => {
     if (!getRef(keyDancer)) return;
 
@@ -42,17 +47,14 @@ const useDancer = (config) => {
 
     setRef(keyCurrentDancer, getRef(keyDancer));
 
-    config = config || {};
-    config.duration = config.duration == null ? 200 : config.duration;
-    config.delay = config.delay || 0;
-    config.timingFunction = config.timingFunction || ((x) => x);
-    config.interpolate = config.interpolate || {};
-    config.defaultValue = config.defaultValue || 0;
-
-    const { defaultValue, interpolate, timingFunction } = config;
-
     setRef(keyTime, defaultValue);
-    setRef(keyConfig, config);
+    setRef(keyConfig, {
+      duration,
+      delay,
+      timingFunction,
+      interpolate,
+      defaultValue,
+    });
 
     const defaultStyle = {};
     for (let key in interpolate)
@@ -74,8 +76,7 @@ const useDancer = (config) => {
       setTimeout(() => {
         cancelAnimationFrame(getRef(keyRaf));
 
-        const raf = (handler) =>
-          setRef(keyRaf, requestAnimationFrame(handler));
+        const raf = (handler) => setRef(keyRaf, requestAnimationFrame(handler));
 
         const slice = 1 / (duration / FPS);
 
@@ -105,7 +106,7 @@ const useDancer = (config) => {
         }
 
         raf(animate);
-      }, config.delay)
+      }, delay)
     );
   };
 
