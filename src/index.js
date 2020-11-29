@@ -27,7 +27,7 @@ const useDancer = ({
   const setStyleByTranslatedValue = (value) => {
     const nextStyle = {};
     for (let key in interpolate)
-      nextStyle[key] = interpolate[key](timingFunction(value));
+      nextStyle[key] = interpolate[key](timingFunction(+value.toFixed(10)));
 
     setStyle(nextStyle, getRef(KEY_DANCER));
   };
