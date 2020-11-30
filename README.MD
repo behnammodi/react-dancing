@@ -79,14 +79,14 @@ You can see more sample of `react-dancing` in [here](https://codesandbox.io/s/re
 
 ## Compare size
 
-| Package                     | Size     |
-| --------------------------- | -------- |
-| react-spring                | 10.47 KB |
-| framer-motion               | 28.15 KB |
-| react-motion                | 4.76 KB  |
-| react-move                  | 4.39 KB  |
-| react-dancing 💪 😀         | 0.6 KB   |
-| Last update **2020 Nov 30** |          |
+| Package             | Size            |
+| ------------------- | --------------- |
+| react-spring        | 10.47 KB        |
+| framer-motion       | 28.15 KB        |
+| react-motion        | 4.76 KB         |
+| react-move          | 4.39 KB         |
+| react-dancing 💪 😀 | 0.6 KB          |
+| Last update         | **2020 Nov 30** |
 
 ## Maintainer
 
