@@ -38,7 +38,7 @@ npm install react-dancing
 
 - Animation base on `requestAnimationFrame`
 - Animation without re-render component
-- Less than 0.6 KB 💪 😀  [bundlephobia](https://bundlephobia.com/result?p=react-dancing)
+- Less than 0.6 KB 💪 😀 [bundlephobia](https://bundlephobia.com/result?p=react-dancing)
 - Without dependency
 
 ## Usage
@@ -76,6 +76,17 @@ function App() {
 | defaultValue   | 0       | type is `number`, if you want to reverse aninmation set `1` and run `start(0)`                     |
 
 You can see more sample of `react-dancing` in [here](https://codesandbox.io/s/react-dancing-version-1-8cdli)
+
+## Compare size
+
+| Package                     | Size     |
+| --------------------------- | -------- |
+| react-spring                | 10.47 KB |
+| framer-motion               | 28.15 KB |
+| react-motion                | 4.76 KB  |
+| react-move                  | 4.39 KB  |
+| react-dancing 💪 😀         | 0.6 KB   |
+| Last update **2020 Nov 30** |          |
 
 ## Maintainer
 
