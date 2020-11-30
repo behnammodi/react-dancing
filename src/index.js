@@ -57,29 +57,29 @@ const useDancer = ({
         const previousValue = getRef(KEY_VALUE);
         const isForward = toValue > previousValue;
 
-        const previousTime = previousValue === 0 ? 0 : duration * previousValue;
+        const previousTimestamp = previousValue === 0 ? 0 : duration * previousValue;
 
-        let firstTime;
+        let start;
         let currentValue = previousValue;
-        function animate(time) {
-          if (firstTime === undefined) {
-            firstTime = time;
+        function animate(timestamp) {
+          if (start === undefined) {
+            start = timestamp;
           } else {
             setStyleByTranslatedValue(currentValue);
           }
 
-          const now = time - firstTime;
+          const elapsed = timestamp - start;
 
           if (isForward) {
             if (currentValue < toValue) {
-              currentValue = (now + previousTime) / duration;
+              currentValue = (elapsed + previousTimestamp) / duration;
               if (currentValue > toValue) currentValue = toValue;
               raf(animate);
               setRef(KEY_VALUE, currentValue);
             }
           } else {
             if (currentValue > toValue) {
-              currentValue = (previousTime - now) / duration;
+              currentValue = (previousTimestamp - elapsed) / duration;
               if (currentValue < toValue) currentValue = toValue;
               raf(animate);
               setRef(KEY_VALUE, currentValue);
