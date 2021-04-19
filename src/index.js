@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types, react/display-name */
-import { useRef, useLayoutEffect } from 'react';
+import { useLayoutEffect, useMemo } from 'react';
 
 const useDancer = ({
   delay = 0,
@@ -13,7 +13,7 @@ const useDancer = ({
   const KEY_VALUE = 2;
   const KEY_TIMEOUT = 3;
   const KEY_CURRENT_DANCER = 4;
-  const { current: refs } = useRef(new Map());
+  const refs = useMemo(() => new Map(), []);
 
   const getRef = (key) => refs.get(key);
   const setRef = (key, value) => refs.set(key, value);
