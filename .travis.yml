@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+ - 16
+install:
+  - npm install
+script:
+  - npm run test
+  - npm run lint
+after_success:
+  - echo "script successfully done"
+after_failure:
+  - echo "ٓscript failure"
