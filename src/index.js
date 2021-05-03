@@ -57,7 +57,8 @@ const useDancer = ({
         const previousValue = getRef(KEY_VALUE);
         const isForward = toValue > previousValue;
 
-        const previousTimestamp = previousValue === 0 ? 0 : duration * previousValue;
+        const previousTimestamp =
+          previousValue === 0 ? 0 : duration * previousValue;
 
         let start;
         let currentValue = previousValue;

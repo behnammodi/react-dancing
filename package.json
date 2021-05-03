@@ -22,7 +22,8 @@
     "format": "prettier ./src --write --ignore-unknown",
     "preversion": "npm run test && npm run format && npm run lint",
     "version": "npm run build",
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && git push --tags && npm publish",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -59,5 +60,11 @@
   },
   "peerDependencies": {
     "react": "^17.0.2"
+  },
+  "lint-staged": {
+    "./src/**/*": [
+      "npm run lint",
+      "npm run format"
+    ]
   }
 }
