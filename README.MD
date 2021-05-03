@@ -26,6 +26,11 @@ For old version of `react-dancing` please go to [react-dancing version 0](https:
   <img src="https://www.codetriage.com/behnammodi/react-dancing/badges/users.svg" alt="Open Source Helpers"> 
 </a>
 
+<a href="https://travis-ci.com/github/behnammodi/react-dancing">
+  <img src="https://travis-ci.com/behnammodi/react-dancing.svg?branch=master" alt="Build Status">
+</a>
+
+
 ## Installation
 
 Using npm:
