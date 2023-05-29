@@ -92,11 +92,3 @@ You can see more sample of `react-dancing` in [here](https://codesandbox.io/s/re
 | react-move          | 4.39 KB         |
 | react-dancing 💪 😀 | 0.6 KB          |
 | Last update         | **2020 Nov 30** |
-
-## Maintainer
-
-[Behnam Mohamamdi](https://github.com/behnammodi)
-
-## Donate
-
-BTC: `1NV1sjQnXwuyHgxQ8G5eWprhxsD5A8yN6r`
